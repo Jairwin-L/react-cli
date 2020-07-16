@@ -6,7 +6,7 @@ import './assets/css/app.less'
 export default () => (
   <>
     <div>
-      <p>我是p标签</p>
+      <p>React</p>
     </div>
     {/* <Button>React</Button> */}
   </>

@@ -2,15 +2,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path')
 const srcDir = path.join(__dirname, "../src");
-console.log(srcDir);
-console.log(`${srcDir}/index.html`);
+console.log(path.resolve(__dirname, 'dist'));
+// console.log(`${srcDir}/index.html`);
 // console.log(path.resolve(__dirname, 'public/index.html'));
 // console.log(__dirname + '/src');
 module.exports = {
   mode: 'development',
   entry: './src/index.jsx',
   output: {
-    // path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist'),
     filename: '[hash].js'
   },
   plugins: [
