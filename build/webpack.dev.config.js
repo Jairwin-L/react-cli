@@ -1,6 +1,6 @@
+"use strict"
 const { merge } = require('webpack-merge');
 const baseConfig = require('./webpack.common.config.js');
-
 module.exports = merge(baseConfig, {
 	// 设置为开发模式
     mode: 'development',

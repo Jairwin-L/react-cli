@@ -1,35 +1,38 @@
 "use strict"
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
-const UglifyWebpackPlugin = require('uglifyjs-webpack-plugin');
+const HappyPack = require('happypack');
+const os = require('os');
+const happyThreadPool = HappyPack.ThreadPool({size: os.cpus().length});
 const path = require('path')
-const srcDir = path.join(__dirname, "../src");
-console.log(path.join(__dirname, "../src/index.jsx"));
-// console.log(`${srcDir}/index.html`);
-// console.log(path.resolve(__dirname, 'public/index.html'));
-// console.log(__dirname + '/src');
-console.log(path.resolve(__dirname, '../dist'));
 module.exports = {
   entry: "./src/index.jsx",
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: '[hash].js'
+    filename: '[hash].js',
+  },
+  externals: {
+    React: 'React',
+    'React-dom': 'ReactDOM'
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: `public/index.html`,
-      // filename: 'index.html'
     }),
     new CleanWebpackPlugin(),
+    new HappyPack({
+      //用id来标识 happypack处理那里类文件
+      id: 'happyBabel',
+      //如何处理  用法和loader 的配置一样
+      loaders: [{
+        loader: 'babel-loader?cacheDirectory=true',
+      }],
+      //共享进程池
+      threadPool: happyThreadPool,
+      //允许 HappyPack 输出日志
+      verbose: true,
+    }),
   ],
-  optimization: {
-    minimizer: [
-      new UglifyWebpackPlugin({
-        exclude: /\/excludes/,
-        parallel: true,
-      }),
-    ],
-  },
   module: {
     rules: [
       {
@@ -43,7 +46,6 @@ module.exports = {
       {
         test: /\.(css|less)$/,
         exclude: /node_modules/,
-        // include: /antd/,
         use: ["style-loader", "css-loader", "less-loader"]
       },
       {
@@ -51,9 +53,23 @@ module.exports = {
         use: {
           loader: 'file-loader',
           options: {
-            //placeholder 占位符
             name: '[name].[ext]',
             limit: 2048 //如果图片大小大于2048【2kb】字节的话，那就像file-loader下被打包到dist/images下，//否则会被打包成Base64的字符串放在bundle.js下
+          }
+        }
+      },
+      {
+        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            limit: 10240,
+            fallback: {
+              loader: 'file-loader',
+              options: {
+                name: 'media/[name].[hash:8].[ext]'
+              }
+            }
           }
         }
       },
