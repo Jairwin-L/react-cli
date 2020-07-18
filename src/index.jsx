@@ -4,6 +4,7 @@ import App from './app'
 import { ConfigProvider } from 'antd'
 import zhCN from 'antd/es/locale/zh_CN'
 import 'moment/locale/zh-cn'
+import './assets/css/common.less'
 
 ReactDOM.render(
 	<ConfigProvider locale={zhCN}>

@@ -1,13 +1,13 @@
-import React from 'react'
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import React, { lazy } from 'react'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 // import loadable from '../util/loadable'
 // import 'animate.css'
 
-// const Main = loadable(() => import('../pages'))
+const Main = lazy(() => import('../page/main'))
 // const Detail = loadable(() => import('../pages/detail'))
 // const Project = loadable(() => import('../pages/project'))
 
-const Router = () => {
+export default () => {
   return (
     <BrowserRouter>
       <Switch>
@@ -19,5 +19,3 @@ const Router = () => {
     </BrowserRouter>
   )
 }
-
-export default Router
