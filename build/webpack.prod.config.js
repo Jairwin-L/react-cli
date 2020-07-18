@@ -1,10 +1,15 @@
 "use strict"
 const {merge} = require('webpack-merge');
 const UglifyWebpackPlugin = require('uglifyjs-webpack-plugin');
-const baseConfig = require('./webpack.common.config.js');
+const baseConfig = require('./webpack.config.js');
+const PurgecssPlugin = require('purgecss-webpack-plugin')
+const path = require('path')
+const glob = require('glob')
+const PATHS = {
+  src: path.join(__dirname, '../src')
+}
 
 module.exports = merge(baseConfig, {
-  // 设置为生产模式
   mode: 'production',
   optimization: {
     minimizer: [
@@ -15,4 +20,10 @@ module.exports = merge(baseConfig, {
       }),
     ],
   },
+  plugins: [
+    // 去除多余或者重复的css
+    new PurgecssPlugin({
+      paths: glob.sync(`${PATHS.src}/**/*`,  { nodir: true }),
+    }),
+  ]
 });
