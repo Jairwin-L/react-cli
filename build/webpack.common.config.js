@@ -1,12 +1,14 @@
 "use strict"
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
+const devMode = process.env.NODE_ENV === 'production'
 const HappyPack = require('happypack');
 const os = require('os');
 const happyThreadPool = HappyPack.ThreadPool({size: os.cpus().length});
 const path = require('path')
 module.exports = {
-  entry: "./src/index.jsx",
+  entry: ["react-hot-loader/patch", "./src/index.jsx"],
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: '[hash].js',
@@ -16,8 +18,14 @@ module.exports = {
     'React-dom': 'ReactDOM'
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: `public/index.html`,
+      minify: {
+        removeComments: devMode ? true : false,
+        collapseWhitespace: devMode ? true : false,
+        removeAttributeQuotes: devMode ? true : false
+      }
     }),
     new CleanWebpackPlugin(),
     new HappyPack({
