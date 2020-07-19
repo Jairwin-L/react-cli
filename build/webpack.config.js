@@ -90,7 +90,7 @@ module.exports = {
         use: {
           loader: 'file-loader',
           options: {
-            name: '[name].[ext]',
+            name: 'img/[name].[hash:8].[ext]',
             limit: 2048 // 如果图片大小大于2048【2kb】字节的话，那就像file-loader下被打包到dist/images下，//否则会被打包成Base64的字符串放在bundle.js下
           }
         }
@@ -100,13 +100,8 @@ module.exports = {
         use: {
           loader: 'file-loader',
           options: {
-            limit: 10240,
-            fallback: {
-              loader: 'file-loader',
-              options: {
-                name: 'media/[name].[hash:8].[ext]'
-              }
-            }
+            name: 'media/[name].[hash:8].[ext]',
+            limit: 10240
           }
         }
       },
