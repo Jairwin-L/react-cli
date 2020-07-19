@@ -9,6 +9,7 @@ module.exports = merge(baseConfig, {
   devServer: {
     port: 8088,
     compress: true,
+    historyApiFallback: true,
     hot: true,
     inline: true,
     // 选项让你更精确地控制bundle信息该怎么显示

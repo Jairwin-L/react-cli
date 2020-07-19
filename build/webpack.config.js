@@ -47,10 +47,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: `public/index.html`,
       minify: {
-        removeComments: devMode ? true : false, // 移除HTML中的注释
-        collapseWhitespace: devMode ? true : false, // 删除空白符与换行符
-        removeAttributeQuotes: devMode ? true : false,
-        minifyCSS: devMode ? true : false, // 压缩内联css
+        removeComments: devMode, // 移除HTML中的注释
+        collapseWhitespace: devMode, // 删除空白符与换行符
+        removeAttributeQuotes: devMode, //删除双引号
+        minifyCSS: devMode, // 压缩内联css
       }
     }),
     new CleanWebpackPlugin(),
