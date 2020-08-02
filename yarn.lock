@@ -4526,11 +4526,6 @@ jest-worker@^26.1.0:
     merge-stream "^2.0.0"
     supports-color "^7.0.0"
 
-js-to-less-var-loader@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/js-to-less-var-loader/-/js-to-less-var-loader-1.0.4.tgz#f83a72e4582651fef2e8a1b2aecf8c3f7ffb4c38"
-  integrity sha1-+Dpy5FgmUf7y6KGyrs+MP3/7TDg=
-
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"

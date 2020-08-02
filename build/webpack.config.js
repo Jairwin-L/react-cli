@@ -69,7 +69,6 @@ module.exports = {
       },
       {
         test: /\.(css|less)$/,
-        exclude: /node_modules/,
         use: [{
           loader: "style-loader"
         }, {
@@ -78,7 +77,14 @@ module.exports = {
           loader: "less-loader",
           options: {
             lessOptions: {
-              paths: [resolvePath('./node_modules')],
+              // modifyVars: {
+              //   '@primary_btn': '#1890ff',
+              //   '@detail_btn': '#2db7f5',
+              //   '@edit_btn': '#8354ee',
+              //   '@delete_btn': '#ff4d4f',
+              //   '@white': '#fff',
+              //   '@black': '#333',
+              // },
               javascriptEnabled: true
             },
           },

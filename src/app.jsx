@@ -5,7 +5,7 @@ import avatar from './assets/img/avatar.jpg'
 import LongTimeNoSee from './assets/media/longtimenosee.mp3'
 import {hot} from 'react-hot-loader';
 import Router from './router'
-// import { Button } from 'antd'
+import { Button } from 'antd'
 
 export default () => {
   return (
@@ -20,7 +20,8 @@ export default () => {
         <img src={avatar} alt="" />
       </div>
       {/* <audio id="audio" src={LongTimeNoSee} autoPlay></audio> */}
-      {/* <Button>React</Button> */}
+      <p className="primary_btn">modifyVars</p>
+      <Button type="primary">React</Button>
     </>
   )
 }
