@@ -1,12 +1,17 @@
 import React from 'react'
+import {Button} from 'antd'
 import '@less/main'
-import { Button } from 'antd'
+import avatar from '@img/avatar.jpg'
+import LongTimeNoSee from '@media/longtimenosee.mp3'
 
 export default () => (
   <>
-    <div>
-      <p>这是一个主页面</p>
-      <Button>按钮</Button>
+    <div className="main">
+      <p>React-Custom-Cli</p>
+      <p className="primary_btn">modifyVars</p>
+      <img src={avatar} alt="" />
+      <Button type="primary">按钮</Button>
+      <audio id="audio" src={LongTimeNoSee} autoPlay></audio>
     </div>
   </>
 )

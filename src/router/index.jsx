@@ -1,18 +1,17 @@
 import React, { lazy } from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-const Main = lazy(() => import('../page/main'))
-const Demo = lazy(() => import('../page/demo'))
+import { hot } from 'react-hot-loader';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import Main from "../page/main";
+import Demo from "../page/demo";
 
-export default () => {
-  return (
+export default hot(module)(
+  () => (
     <BrowserRouter>
       <Switch>
         <Route path='/' exact component={Main} />
         <Route path='/demo' exact component={Demo} />
-        {/* <Route path='/detail/:id' exact component={Detail} />
-        <Route path='/project' exact component={Project} />
-        <Redirect to='/' /> */}
+        <Redirect to='/' />
       </Switch>
     </BrowserRouter>
   )
-}
+)

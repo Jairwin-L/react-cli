@@ -77,14 +77,14 @@ module.exports = {
           loader: "less-loader",
           options: {
             lessOptions: {
-              // modifyVars: {
-              //   '@primary_btn': '#1890ff',
-              //   '@detail_btn': '#2db7f5',
-              //   '@edit_btn': '#8354ee',
-              //   '@delete_btn': '#ff4d4f',
-              //   '@white': '#fff',
-              //   '@black': '#333',
-              // },
+              modifyVars: {
+                '@primary_btn': '#2598ff',
+                '@detail_btn': '#2db7f5',
+                '@edit_btn': '#8354ee',
+                '@delete_btn': '#ff4d4f',
+                '@white': '#fff',
+                '@black': '#333',
+              },
               javascriptEnabled: true
             },
           },
@@ -124,7 +124,7 @@ module.exports = {
       '@api': resolvePath('src/api'),
       '@img': resolvePath('src/assets/img'),
       '@less': resolvePath('src/assets/css'),
-      '@media': resolvePath('static/media'),
+      '@media': resolvePath('src/assets/media'),
     }
   },
 }
