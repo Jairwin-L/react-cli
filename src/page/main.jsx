@@ -1,5 +1,5 @@
 import React from 'react'
-import '../assets/css/main.less'
+import '@less/main'
 // import { Button } from 'antd'
 
 export default () => (
