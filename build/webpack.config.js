@@ -8,6 +8,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // clean-webpack-plugin：https://github.com/johnagan/clean-webpack-plugin
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const devMode = process.env.NODE_ENV === 'production'
 const path = require('path')
 const resolvePath = dir => path.join(__dirname, '..', dir)
@@ -53,7 +54,8 @@ module.exports = {
       },
       favicon: resolvePath('public/jairwin.ico')
     }),
-    new CleanWebpackPlugin(),
+    // 在打包之前，可以删除dist文件夹下的所有内容
+    new CleanWebpackPlugin()
   ],
   /* 
   https://webpack.docschina.org/configuration/module/
@@ -68,11 +70,28 @@ module.exports = {
         },
       },
       {
-        test: /\.(css|less)$/,
+        test: /\.css$/i,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // 仅仅在 development 模式下开启 hmr
+              hmr: process.env.NODE_ENV === 'development',
+              // 如果 hmr 不工作, 请开启强制选项
+              reloadAll: true,
+            },
+          },
+          'css-loader',
+        ],
+      },
+      {
+        test: /\.(less)$/,
         use: [{
           loader: "style-loader"
         }, {
           loader: "css-loader"
+        }, {
+          loader: "postcss-loader"
         }, {
           loader: "less-loader",
           options: {
@@ -125,6 +144,34 @@ module.exports = {
       '@img': resolvePath('src/assets/img'),
       '@less': resolvePath('src/assets/css'),
       '@media': resolvePath('src/assets/media'),
+    }
+  },
+  optimization: {
+    splitChunks: { //启动代码分割，有默认配置项（同步代码）
+      chunks: 'all'
+    },
+    splitChunks: { //启动代码分割,不写有默认配置项
+      chunks: 'all',//参数all/initial/async，只对所有/同步/异步进行代码分割
+      minSize: 30000, //大于30kb才会对代码分割
+      maxSize: 0,
+      minChunks: 1,//打包生成的文件，当一个模块至少用多少次时才会进行代码分割
+      maxAsyncRequests: 5,//同时加载的模块数最多是5个
+      maxInitialRequests: 3,//入口文件最多3个模块会做代码分割，否则不会
+      automaticNameDelimiter: '~',//文件自动生成的连接符
+      name: true,
+      cacheGroups: {//对同步代码走缓存组
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,//谁优先级大就把打包后的文件放到哪个组
+          filename: 'vendors.js'
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,//模块已经被打包过了，就不用再打包了，复用之前的就可以
+          filename: 'common.js' //打包之后的文件名   
+        }
+      }
     }
   },
 }
