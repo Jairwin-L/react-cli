@@ -20,6 +20,7 @@
     ],
     ["@babel/plugin-proposal-class-properties", { "loose": true }],
     ["import", {"libraryName": "antd", "style": true}],
-    ["dynamic-import-webpack"]  // 异步代码(import)
+    ["dynamic-import-webpack"],  // 异步代码(import)
+    "react-hot-loader/babel"
   ]
 }
