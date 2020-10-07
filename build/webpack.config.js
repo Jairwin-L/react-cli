@@ -31,7 +31,7 @@ module.exports = {
   */
   output: {
     path: resolvePath('dist'),
-    filename: '[hash].js',
+    filename: '[name].[chunk:8].js',
   },
   /* 
   外部扩展：https://webpack.docschina.org/configuration/externals/
@@ -50,7 +50,8 @@ module.exports = {
         collapseWhitespace: devMode, // 删除空白符与换行符
         removeAttributeQuotes: devMode, //删除双引号
         minifyCSS: devMode, // 压缩内联css
-      }
+      },
+      favicon: resolvePath('public/jairwin.ico')
     }),
     new CleanWebpackPlugin(),
   ],
@@ -61,7 +62,6 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        // use: 'babel-loader',
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',

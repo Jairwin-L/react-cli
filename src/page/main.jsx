@@ -6,12 +6,12 @@ import LongTimeNoSee from '@media/longtimenosee.mp3'
 
 export default () => (
   <>
-    <div className="main">
+    <main className="main">
       <p>React-Custom-Cli</p>
       <p className="primary_btn">modifyVars</p>
       <img src={avatar} alt="" />
       <Button type="primary">按钮</Button>
       <audio id="audio" src={LongTimeNoSee} autoPlay></audio>
-    </div>
+    </main>
   </>
 )

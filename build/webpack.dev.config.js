@@ -1,5 +1,6 @@
 "use strict"
-const {merge} = require('webpack-merge');
+const webpack = require('webpack');
+const { merge } = require('webpack-merge');
 const baseConfig = require('./webpack.config.js');
 module.exports = merge(baseConfig, {
   // 设置为开发模式
@@ -22,5 +23,6 @@ module.exports = merge(baseConfig, {
       entrypoints: false,
       assets: false
     }
-  }
+  },
+  plugins: [new webpack.HotModuleReplacementPlugin()],
 });

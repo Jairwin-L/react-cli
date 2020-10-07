@@ -1,4 +1,4 @@
-import React, { lazy } from 'react'
+import React from 'react'
 import { hot } from 'react-hot-loader';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import Main from "../page/main";
