@@ -19,3 +19,6 @@ yarn add less-loader style-loader css-loader -D
 
 - ESLint+Prettier代码规范实践
   - https://zhuanlan.zhihu.com/p/68026905
+
+### FAQ
+- TS Hmr：https://github.com/webpack-contrib/webpack-hot-middleware/issues/89

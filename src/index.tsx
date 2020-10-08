@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {AppContainer} from 'react-hot-loader';
-import {ConfigProvider} from 'antd'
+import { AppContainer } from 'react-hot-loader';
+import { ConfigProvider } from 'antd'
 import zhCN from 'antd/es/locale/zh_CN'
 import 'moment/locale/zh-cn'
 import App from './app'
 import '@less/common'
 
-const render = Component => {
+const render = (Component: any) => {
   ReactDOM.render(
     <ConfigProvider locale={zhCN}>
       <AppContainer>

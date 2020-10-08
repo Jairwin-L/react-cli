@@ -9,6 +9,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 // clean-webpack-plugin：https://github.com/johnagan/clean-webpack-plugin
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const devMode = process.env.NODE_ENV === 'production'
 const path = require('path')
 const resolvePath = dir => path.join(__dirname, '..', dir)
@@ -22,7 +23,7 @@ module.exports = {
   entry: {
     'app': [
       'react-hot-loader/patch',
-      resolvePath('src/index.jsx')
+      resolvePath('src/index.tsx')
     ]
   },
   // entry: ["react-hot-loader/patch", resolve('src/index.jsx')],
@@ -55,7 +56,8 @@ module.exports = {
       favicon: resolvePath('public/jairwin.ico')
     }),
     // 在打包之前，可以删除dist文件夹下的所有内容
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new ForkTsCheckerWebpackPlugin()
   ],
   /* 
   https://webpack.docschina.org/configuration/module/
@@ -63,11 +65,29 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
-        },
+          loader: "babel-loader",
+          options: {
+            cacheDirectory: true,
+            babelrc: false,
+            presets: [
+              [
+                "@babel/preset-env",
+                {targets: {browsers: "last 2 versions"}} // or whatever your project requires
+              ],
+              "@babel/preset-typescript",
+              "@babel/preset-react"
+            ],
+            plugins: [
+              // plugin-proposal-decorators is only needed if you're using experimental decorators in TypeScript
+              ["@babel/plugin-proposal-decorators", {legacy: true}],
+              ["@babel/plugin-proposal-class-properties", {loose: true}],
+              "react-hot-loader/babel"
+            ]
+          }
+        }
       },
       {
         test: /\.css$/i,
@@ -136,7 +156,7 @@ module.exports = {
   */
   resolve: {
     // 自动解析确定的扩展，可以在引入模块时不带扩展
-    extensions: ['.js', '.jsx', '.json', '.less'],
+    extensions: ['.js', '.jsx', '.json', '.less', '.ts', '.tsx'],
     // 路径别名
     alias: {
       '@components': resolvePath('src/components'),
