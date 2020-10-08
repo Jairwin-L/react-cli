@@ -5,8 +5,8 @@
       "dom.iterable",
       "esnext"
     ],
-    "module": "esnext",
-    "target": "esnext",
+    "module": "ESNext",
+    "target": "ESNext",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,

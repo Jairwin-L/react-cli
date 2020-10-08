@@ -10,6 +10,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const tsImportPluginFactory = require('ts-import-plugin');
 const devMode = process.env.NODE_ENV === 'production'
 const path = require('path')
 const resolvePath = dir => path.join(__dirname, '..', dir)
@@ -67,27 +68,45 @@ module.exports = {
       {
         test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            cacheDirectory: true,
-            babelrc: false,
-            presets: [
-              [
-                "@babel/preset-env",
-                {targets: {browsers: "last 2 versions"}} // or whatever your project requires
+        use: [
+          {
+            loader: "babel-loader",
+            options: {
+              cacheDirectory: true,
+              babelrc: false,
+              presets: [
+                [
+                  "@babel/preset-env",
+                  {targets: {browsers: "last 2 versions"}} // or whatever your project requires
+                ],
+                "@babel/preset-typescript",
+                "@babel/preset-react"
               ],
-              "@babel/preset-typescript",
-              "@babel/preset-react"
-            ],
-            plugins: [
-              // plugin-proposal-decorators is only needed if you're using experimental decorators in TypeScript
-              ["@babel/plugin-proposal-decorators", {legacy: true}],
-              ["@babel/plugin-proposal-class-properties", {loose: true}],
-              "react-hot-loader/babel"
-            ]
+              plugins: [
+                // plugin-proposal-decorators is only needed if you're using experimental decorators in TypeScript
+                ["@babel/plugin-proposal-decorators", {legacy: true}],
+                ["@babel/plugin-proposal-class-properties", {loose: true}],
+                "react-hot-loader/babel"
+              ]
+            }
+          },
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+              getCustomTransformers: () => ({
+                before: [
+                  tsImportPluginFactory([
+                    {style: true}
+                  ])
+                ]
+              }),
+              compilerOptions: {
+                module: 'es2015'
+              }
+            }
           }
-        }
+        ]
       },
       {
         test: /\.css$/i,
