@@ -10,6 +10,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 const tsImportPluginFactory = require('ts-import-plugin');
 const devMode = process.env.NODE_ENV === 'production'
 const path = require('path')
@@ -58,7 +59,8 @@ module.exports = {
     }),
     // 在打包之前，可以删除dist文件夹下的所有内容
     new CleanWebpackPlugin(),
-    new ForkTsCheckerWebpackPlugin()
+    new ForkTsCheckerWebpackPlugin(),
+    new AntdDayjsWebpackPlugin()
   ],
   /* 
   https://webpack.docschina.org/configuration/module/
@@ -180,6 +182,7 @@ module.exports = {
     alias: {
       '@components': resolvePath('src/components'),
       '@api': resolvePath('src/api'),
+      '@const': resolvePath('src/const'),
       '@img': resolvePath('src/assets/img'),
       '@less': resolvePath('src/assets/css'),
       '@media': resolvePath('src/assets/media'),

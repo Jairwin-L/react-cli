@@ -5,7 +5,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server --config ./build/webpack.dev.config.js",
+    "start": "cross-env PORT=3030 webpack-dev-server --config ./build/webpack.dev.config.js",
     "build": "webpack --config ./build/webpack.prod.config.js",
     "clean:dist": "rimraf dist",
     "clean:nm": "rimraf node_modules"
@@ -22,6 +22,7 @@
     "@types/webpack-env": "^1.15.3",
     "@typescript-eslint/eslint-plugin": "^4.4.0",
     "@typescript-eslint/parser": "^4.4.0",
+    "antd-dayjs-webpack-plugin": "^1.0.1",
     "autoprefixer": "^9.8.5",
     "babel-loader": "^8.1.0",
     "babel-plugin-dynamic-import-webpack": "^1.1.0",
@@ -63,10 +64,11 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.6",
     "antd": "^4.6.6",
+    "dayjs": "^1.9.1",
     "eslint-plugin-prettier": "^3.1.4",
     "flyio": "^0.6.14",
-    "react": "^16.13.1",
-    "react-dom": "npm:@hot-loader/react-dom",
+    "react": "17.0.0",
+    "react-dom": "17.0.0",
     "react-router-dom": "^5.2.0",
     "typescript": "^4.0.3"
   },

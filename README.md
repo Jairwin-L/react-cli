@@ -21,4 +21,4 @@ yarn add less-loader style-loader css-loader -D
   - https://zhuanlan.zhihu.com/p/68026905
 
 ### FAQ
-- TS Hmr：https://github.com/webpack-contrib/webpack-hot-middleware/issues/89
+- TS Hmr：https://github.com/webpack-contrib/webpack-hot-middleware/issues/89#issuecomment-389158559
