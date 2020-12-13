@@ -8,6 +8,7 @@ module.exports = merge(baseConfig, {
   devtool: 'inline-source-map',
   // 配置服务端目录和端口
   devServer: {
+    host: 'web.jairwin.cn',
     port: 8088,
     compress: true,
     historyApiFallback: true,

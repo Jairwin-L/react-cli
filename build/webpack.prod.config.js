@@ -2,9 +2,9 @@
 const {merge} = require('webpack-merge');
 const TerserPlugin = require('terser-webpack-plugin');
 const baseConfig = require('./webpack.config.js');
-const PurgecssPlugin = require('purgecss-webpack-plugin')
-const path = require('path')
-const glob = require('glob')
+const PurgecssPlugin = require('purgecss-webpack-plugin');
+const path = require('path');
+const glob = require('glob');
 const PATHS = {
   src: path.join(__dirname, '../src')
 }

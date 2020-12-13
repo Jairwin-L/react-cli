@@ -7,14 +7,37 @@ const webpack = require('webpack');
 // html-webpack-plugin：https://www.webpackjs.com/plugins/html-webpack-plugin/
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // clean-webpack-plugin：https://github.com/johnagan/clean-webpack-plugin
-const {CleanWebpackPlugin} = require("clean-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
+// html-webpack-externals-plugin：https://github.com/mmiller42/html-webpack-externals-plugin
+const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
+// webpackbar：https://github.com/nuxt-contrib/webpackbar（可以显示build进度，以及filename and loaders）
+const WebpackBar = require('webpackbar');
 const tsImportPluginFactory = require('ts-import-plugin');
-const devMode = process.env.NODE_ENV === 'production'
-const path = require('path')
-const resolvePath = dir => path.join(__dirname, '..', dir)
+const devMode = process.env.NODE_ENV === 'production';
+const path = require('path');
+const resolvePath = dir => path.join(__dirname, '..', dir);
+
+const externals = [
+  {
+    "module": "react",
+    "entry": "//unpkg.com/react@17/umd/react.production.min.js",
+    "global": "React"
+  },
+  {
+    "module": "react-dom",
+    "entry": "//unpkg.com/react-dom@17/umd/react-dom.production.min.js",
+    "global": "ReactDOM"
+  },
+  {
+    "module": "react-router-dom",
+    "entry": "//cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.2.0/react-router-dom.min.js",
+    "global": "ReactRouterDOM"
+  }
+];
+
 module.exports = {
   /* 
   第一项：
@@ -41,10 +64,7 @@ module.exports = {
   外部扩展：https://webpack.docschina.org/configuration/externals/
   可以不处理应用的某些依赖库，使用externals配置后，依旧可以在代码中通过CMD、AMD或者window/global全局的方式访问（此教程使用了静态资源托管库）
   */
-  externals: {
-    React: 'React',
-    'React-dom': 'ReactDOM'
-  },
+  externals,
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
@@ -60,7 +80,11 @@ module.exports = {
     // 在打包之前，可以删除dist文件夹下的所有内容
     new CleanWebpackPlugin(),
     new ForkTsCheckerWebpackPlugin(),
-    new AntdDayjsWebpackPlugin()
+    new AntdDayjsWebpackPlugin(),
+    new WebpackBar(),
+    new HtmlWebpackExternalsPlugin({
+      externals: externals,
+    }),
   ],
   /* 
   https://webpack.docschina.org/configuration/module/

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Button, DatePicker } from 'antd'
+import { Button, DatePicker, Input } from 'antd'
 import '@less/main'
 import avatar from '@img/avatar.jpg'
 // import LongTimeNoSee from '@media/longtimenosee.mp3'
@@ -33,6 +33,8 @@ export default () => {
         <DatePicker.RangePicker onChange={onDate}/>
         <p className="primary_btn">modifyVars</p>
         <img src={avatar} />
+        <Input placeholder="11223"/>
+        <Input placeholder="3123q23"/>
         <Button type="primary">按钮</Button>
         {/* <audio id="audio" src={LongTimeNoSee} autoPlay></audio> */}
       </main>
