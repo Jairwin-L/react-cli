@@ -1,17 +1,25 @@
-let BASE_URL = ``
-const hostName = window.location.hostname
-const protocol = window.location.protocol
-const BASE_URL_MAP = {
-  'web.jairwin.cn': `test.api.jairwin.cn`,
-  'demo.jairwin.cn': `test.api.jairwin.cn`,
+import { ApiUrl } from "../typings/constant"
+
+export let BASE_URL = ``
+export const HostName = window.location.hostname
+export const protocol = window.location.protocol
+export const ORIGIN = window.location.origin
+export const API_URL_MAP = {
+  'web.jairwin.cn': ApiUrl.DEMO,
+  "demo": ApiUrl.DEMO,
 }
-for (let [key, value] of Object.entries(BASE_URL_MAP)) {
-  if (hostName.includes(key)) {
-    BASE_URL = `${protocol}//${value}/api/`
+
+for (let [key, value] of Object.entries(API_URL_MAP)) {
+  if (HostName.includes(key)) {
+    BASE_URL = `${value}/api/cms/`
     break
   }
 }
+
 export default {
   BASE_URL,
-  BASE_URL_MAP,
+  API_URL_MAP,
+  HostName,
+  protocol,
+  ORIGIN
 }

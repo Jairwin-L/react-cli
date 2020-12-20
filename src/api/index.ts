@@ -1,22 +1,60 @@
-import { message } from 'antd'
-import fly from 'flyio'
+import { message, Modal } from 'antd'
+import fly, { FlyResponse, FlyRequestConfig } from 'flyio'
+import { ORIGIN } from './config'
 import config from './config'
-
 interface CommonResponse {
   code: number
   msg: string
 }
 
-fly.interceptors.request.use((request: any) => {
-  if (sessionStorage.getItem('token')) request.headers['token'] = sessionStorage.getItem('token')
-  request.headers['Content-Type'] = 'application/json'
-  request.headers['Accept'] = 'application/json'
+type RequestConfig = FlyRequestConfig & { data: any }
+
+function commonResponse(res: RequestConfig): {
+  data: any
+  statusCode: number
+} {
+  const data: CommonResponse = res?.data
+  const statusCode = Number(data?.code)
+  return { data, statusCode }
+}
+
+function responseMessage(msg: string, statusCode?: number) {
+  msg && (statusCode === 1 ? message.success(msg) : message.error(msg))
+}
+
+fly.interceptors.request.use((request: FlyRequestConfig) => {
+  if (sessionStorage.getItem('token')) {
+    request.headers['token'] = sessionStorage.getItem('token')
+    request.headers['Content-Type'] = 'application/json'
+    request.headers['Accept'] = 'application/json'
+  }
   return request
 })
 
-function responseMessage(msg: string, statusCode?: number) {
-  if (msg) statusCode === 1 ? message.success(msg) : message.error(msg)
-}
+fly.interceptors.response.use(
+  (response: FlyResponse) => { return response },
+  (err: any) => {
+    const data: any = err.response?.data
+    const statusCode = Number(data?.code)
+    if (statusCode === 401) {
+      return Promise.reject(
+        Modal.error({
+          title: `提示`,
+          content: `登录超时，请重新登录！`,
+          centered: true,
+          okText: '退出',
+          onOk: () => {
+            sessionStorage.clear()
+            window.location.replace(`${ORIGIN}`)
+          }
+        })
+      )
+    }
+    if (statusCode === 404) return Promise.reject(err)
+    //发生网络错误后会走到这里
+    return Promise.reject(err.status)
+  }
+)
 
 class ApiRequest {
   private static instance: ApiRequest
@@ -29,67 +67,60 @@ class ApiRequest {
     return this.instance
   }
   public async get(url: string, params: any = {}): Promise<any> {
-    const res: any = params.id ? await fly.get(`${this.BASE_URL}${url}/${params.id}`) : await fly.get(`${this.BASE_URL}${url}`, params)
-    const data: CommonResponse = res.data
-    const statusCode = Number(data.code)
+    const res: any = params.id || params.userId ? await fly.get(`${this.BASE_URL}${url}/${params.id || params.userId}`) : await fly.get(`${this.BASE_URL}${url}`, params)
+    const { data, statusCode } = commonResponse(res)
     return new Promise((resolve, reject) => {
       if (statusCode === 1) {
-        responseMessage(data.msg, 1)
-        resolve(res.data)
+        responseMessage(data?.msg, 1)
+        resolve(data?.data)
       } else if (statusCode === 0) {
-        responseMessage(data.msg, 0)
-        reject(data.msg)
-      } else if (statusCode === 401) {
-        responseMessage(data.msg, 401)
-        reject(data.msg)
+        responseMessage(data?.msg, 0)
+        reject(data)
       } else {
-        responseMessage(data.msg)
-        reject(data.msg)
+        responseMessage(data?.msg)
+        reject(data)
       }
     })
   }
-  public async post(url: string, obj: any = {}): Promise<any> {
-    const res: any = await fly.post(`${this.BASE_URL}${url}`, obj)
-    const data: CommonResponse = res.data
-    const statusCode = Number(data.code)
+  public async post(url: string, data: any = {}): Promise<any> {
+    const res: any = await fly.post(`${this.BASE_URL}${url}`, data)
+    const { data: commonData, statusCode }: any = commonResponse(res)
     return new Promise((resolve, reject) => {
       if (statusCode === 1) {
-        responseMessage(data.msg, 1)
-        resolve(res)
+        responseMessage(commonData?.msg, 1)
+        resolve(commonData?.data)
       } else if (statusCode === 0) {
-        responseMessage(data.msg, 0)
-        reject(data.msg)
+        responseMessage(commonData?.msg, 0)
+        reject(commonData)
       } else {
-        responseMessage(data.msg)
-        reject(data.msg)
+        responseMessage(commonData?.msg)
+        reject(commonData)
       }
     })
   }
   public async delete(url: string, params: any = {}): Promise<any> {
     const res: any = await fly.delete(`${this.BASE_URL}${url}/${params}`)
-    const data: CommonResponse = res.data
-    const statusCode = Number(data.code)
+    const { data, statusCode } = commonResponse(res)
     return new Promise((resolve, reject) => {
       if (statusCode === 1) {
-        responseMessage(data.msg, 1)
+        responseMessage(data?.msg, 1)
         resolve(res)
       } else {
-        responseMessage(data.msg)
-        reject(data.msg)
+        responseMessage(data?.msg)
+        reject(data)
       }
     })
   }
-  public async put(url: string, obj: any = {}): Promise<any> {
-    const res: any = await fly.put(`${this.BASE_URL}${url}`, obj)
-    const data: CommonResponse = res.data
-    const statusCode = Number(data.code)
+  public async put(url: string, data: any = {}): Promise<any> {
+    const res: any = await fly.put(`${this.BASE_URL}${url}`, data)
+    const { data: commonData, statusCode } = commonResponse(res)
     return new Promise((resolve, reject) => {
       if (statusCode === 1) {
-        responseMessage(data.msg, 1)
+        responseMessage(commonData?.msg, 1)
         resolve(res)
       } else {
-        responseMessage(data.msg)
-        reject(data.msg)
+        responseMessage(commonData?.msg)
+        reject(commonData)
       }
     })
   }

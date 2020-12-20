@@ -23,7 +23,7 @@ yarn start
 访问
 
 ```
-web.jairwin.cn:8080
+web.jairwin.cn:8088
 ```
 
 > 分支
@@ -45,3 +45,4 @@ yarn add less-loader style-loader css-loader -D
 
 ### FAQ
 - TS Hmr：https://github.com/webpack-contrib/webpack-hot-middleware/issues/89#issuecomment-389158559
+- No module factory available for dependency type: CssDependency：https://github.com/webpack-contrib/mini-css-extract-plugin/issues/493#issuecomment-603038616
