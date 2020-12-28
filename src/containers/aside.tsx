@@ -1,5 +1,5 @@
-import React from 'react'
-import { Layout, Avatar } from 'antd'
+import React from "react"
+import { Layout, Avatar } from "antd"
 import CustomMenu from '../components/menu'
 import { MenuItem } from '../typings/menu'
 
@@ -8,7 +8,7 @@ const { Sider } = Layout
 interface Props {
 	avatar?: string
 	menuToggle: boolean
-  menu: MenuItem[] | undefined
+	menu: MenuItem[] | undefined
 }
 
 export default (props: Props): JSX.Element => {

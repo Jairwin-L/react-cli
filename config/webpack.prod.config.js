@@ -13,6 +13,7 @@ module.exports = merge(baseConfig, {
   mode: 'production',
   optimization: {
     minimize: true,
+    concatenateModules: true,
     minimizer: [
       new TerserPlugin({
         exclude: /\/excludes/,

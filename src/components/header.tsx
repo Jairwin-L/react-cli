@@ -1,6 +1,6 @@
-import React from 'react'
-import { useHistory } from 'react-router-dom'
-import { Menu, Dropdown, Layout, Avatar } from 'antd'
+import React from "react"
+import { useHistory } from "react-router-dom"
+import { Menu, Dropdown, Layout, Avatar } from "antd"
 import { LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 const { Header } = Layout
 
@@ -8,13 +8,13 @@ interface Props {
 	onMenu: () => void
 	avatar: string
 	menuToggle: boolean
-  loginOut: () => void
-  history: any
+	loginOut: () => void
+	history: any
 }
 
 export default (props: Props): JSX.Element => {
-  const history = useHistory();
-  const { onMenu, avatar, menuToggle, loginOut } = props;
+	const history = useHistory();
+	const { onMenu, avatar, menuToggle, loginOut } = props;
 	const menu = (
 		<Menu>
 			<Menu.Item onClick={() => { history.push('/auth/change-password') }}>

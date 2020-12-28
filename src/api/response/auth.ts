@@ -1,4 +1,3 @@
 export interface LoginResponse {
-  token: string
-  menus: any
+	token: string
 }

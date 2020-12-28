@@ -1,8 +1,7 @@
-import { IdParam } from '../common'
 export interface ItemParam {
-  username: string
-  password: string
-  roleId?: string
+	username: string
+	password: string
+	roleId?: string
 }
 
-export type UpdateParam = IdParam & ItemParam
+export type UpdateParam = ItemParam
