@@ -27,21 +27,21 @@ const CssCleanupPlugin = require('css-cleanup-webpack-plugin');
 const path = require('path');
 const devMode = process.env.NODE_ENV === 'production';
 const resolvePath = dir => path.join(__dirname, '..', dir);
-
+// https://cdn.baomitu.com
 const externals = [
 	{
 		"module": "react",
-		"entry": "//unpkg.com/react@17/umd/react.production.min.js",
+		"entry": "//lib.baomitu.com/react/17.0.1/umd/react.production.min.js",
 		"global": "React"
 	},
 	{
 		"module": "react-dom",
-		"entry": "//unpkg.com/react-dom@17/umd/react-dom.production.min.js",
+		"entry": "//lib.baomitu.com/react-dom/17.0.1/umd/react-dom.production.min.js",
 		"global": "ReactDOM"
 	},
 	{
 		"module": "react-router-dom",
-		"entry": "//cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.2.0/react-router-dom.min.js",
+		"entry": "//lib.baomitu.com/react-router-dom/5.2.0/react-router-dom.min.js",
 		"global": "ReactRouterDOM"
 	}
 ];
