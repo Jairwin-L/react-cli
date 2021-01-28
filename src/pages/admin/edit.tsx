@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Form, Input, Button, Space, Select } from "antd";
-import * as AdminAction from "../../api/request/admin";
 import { ItemData } from "../../api/response/user";
 import { RouterParams } from "../../typings/page";
 import Breadcrumb from "../../components/breadcrumb";

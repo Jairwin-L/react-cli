@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { ColumnsType } from "antd/es/table";
 import Breadcrumb from "../../components/breadcrumb";
 import Table from "../../components/table";
-import * as AdminAction from "../../api/request/admin";
 import { ListData, Item } from "../../api/response/user";
 import CreateContext from "../../hook/create-context";
 import AddBtn from "../../components/add-btn";
@@ -14,14 +13,6 @@ export default (): JSX.Element => {
 	const [totalPage, setTotalPage] = useState<number>(1);
 	const [pageSize, setPageSize] = useState<10>();
 	const fetchList = async () => {
-		const data: ListData = await AdminAction.list({
-			curr: pageIndex,
-			size: 10,
-		})
-		setList([].concat.apply([], data?.list));
-		setTotalCount(data?.totalCount);
-		setPageSize(data?.pageSize);
-		setTotalPage(data?.totalPage);
 	};
 	useEffect(() => {
 		fetchList()

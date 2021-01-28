@@ -1,6 +1,5 @@
 import React from "react";
 import { Form, Input, Button } from "antd";
-import * as AdminAction from "../../api/request/admin";
 import Breadcrumb from "../../components/breadcrumb";
 import { useHistory } from "react-router-dom";
 const layout = {
