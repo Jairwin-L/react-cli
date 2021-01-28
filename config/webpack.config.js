@@ -17,8 +17,6 @@ const WebpackBar = require('webpackbar');
 // 提供离线体验
 const OfflinePlugin = require('offline-plugin');
 const WebpackHookPlugin = require('webpack-hook-plugin');
-// 显示系统级的 Webpack 构建错误和警告通知
-const WebpackBuildNotifierPlugin = require('webpack-build-notifier');
 const tsImportPluginFactory = require('ts-import-plugin');
 // 生成包含构建hash的json文件：SPA会定期把初始 hash 和远程的 hash 相比较，并在不匹配的时候重新加载。
 const BuildHashPlugin = require('build-hash-webpack-plugin');
@@ -76,11 +74,6 @@ module.exports = {
 	可以不处理应用的某些依赖库，使用externals配置后，依旧可以在代码中通过CMD、AMD或者window/global全局的方式访问（此教程使用了静态资源托管库）
 	*/
 	plugins: [
-		new WebpackBuildNotifierPlugin({
-			title: "react-custom-cli",
-			logo: resolvePath('public/jairwin.ico'),
-			suppressSuccess: true, // don't spam success notifications
-		}),
 		new webpack.HotModuleReplacementPlugin(),
 		new HtmlWebpackPlugin({
 			template: `public/index.html`,
