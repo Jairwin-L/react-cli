@@ -2,20 +2,11 @@ import { message, Modal } from "antd"
 import fly, { FlyResponse, FlyRequestConfig } from 'flyio'
 import { ORIGIN } from './config'
 import config from './config'
-interface CommonResponse {
-	code: number
-	msg: string
-}
 
 type RequestConfig = FlyRequestConfig & { data: any }
 
-function commonResponse(res: RequestConfig): {
-	data: any
-	statusCode: number
-} {
-	const data: CommonResponse = res?.data
-	const statusCode = Number(data?.code)
-	return { data, statusCode }
+function commonResponse(res: RequestConfig) {
+	return res?.data
 }
 
 function responseMessage(msg: string, statusCode?: number) {
@@ -23,6 +14,7 @@ function responseMessage(msg: string, statusCode?: number) {
 }
 
 fly.interceptors.request.use((request: FlyRequestConfig) => {
+	request.headers.apifoxToken = 'sXedLKsR7alyUTRseHi3l'
 	if (sessionStorage.getItem('token')) {
 		request.headers['token'] = sessionStorage.getItem('token')
 		request.headers['Content-Type'] = 'application/json'
@@ -68,14 +60,11 @@ class ApiRequest {
 	}
 	public async get(url: string, params: any = {}): Promise<any> {
 		const res: any = await fly.get(`${this.BASE_URL}${url}`, params);
-		const { data, statusCode } = commonResponse(res)
+		const { data } = res;
 		return new Promise((resolve, reject) => {
-			if (statusCode === 1) {
+			if (data.success) {
 				responseMessage(data?.msg, 1)
-				resolve(data?.data)
-			} else if (statusCode === 0) {
-				responseMessage(data?.msg, 0)
-				reject(data)
+				resolve(data)
 			} else {
 				responseMessage(data?.msg)
 				reject(data)

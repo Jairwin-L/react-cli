@@ -25,9 +25,9 @@ export default (): JSX.Element => {
 			sessionStorage.setItem("token", data?.token);
 			setLoginFlag(false);
 			history.push("/main");
-		} catch (err) {
+		} catch (error) {
 			setLoginFlag(false);
-			console.log(err);
+			console.log(error);
 		}
 	};
 
@@ -44,7 +44,7 @@ export default (): JSX.Element => {
 							<Input type="password" size="large" placeholder="请输入密码" prefix={<LockOutlined />} />
 						</Form.Item>
 						<Form.Item>
-							<Button type="primary" size="large" htmlType="submit" className="login_btn" disabled>{`登录${loginFlag ? "中……" : ""}`}</Button>
+							<Button type="primary" size="large" htmlType="submit" className="login_btn">{`登录${loginFlag ? "中……" : ""}`}</Button>
 						</Form.Item>
 					</Form>
 				</div>

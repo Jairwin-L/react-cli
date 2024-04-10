@@ -1,14 +1,12 @@
 {
-  "name": "react-custom-cli",
+  "name": "react-cli",
   "version": "1.0.0",
   "author": "Jairwin",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server --config ./config/webpack.dev.config.js",
-    "build": "webpack --config ./config/webpack.prod.config.js",
-    "clean:dist": "rimraf dist",
-    "clean:nm": "rimraf node_modules"
+    "dev": "webpack-dev-server --config ./config/webpack.dev.config.js",
+    "build": "webpack --config ./config/webpack.prod.config.js"
   },
   "devDependencies": {
     "@babel/core": "^7.10.4",
@@ -54,17 +52,17 @@
     "rm-unused-css": "^1.1.16",
     "style-loader": "^1.2.1",
     "terser-webpack-plugin": "^3.0.7",
-    "ts-import-plugin": "^1.6.6",
-    "ts-loader": "^8.0.4",
+    "ts-import-plugin": "^3.0.0",
+    "ts-loader": "^9.5.1",
     "uglifyjs-webpack-plugin": "^2.2.0",
-    "webpack": "^4.43.0",
-    "webpack-build-notifier": "^2.1.1",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0",
+    "webpack": "^5.91.0",
+    "webpack-build-notifier": "^2.3.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4",
     "webpack-hook-plugin": "^1.0.7",
-    "webpack-merge": "^5.0.9",
-    "webpack-parallel-uglify-plugin": "^1.1.2",
-    "webpackbar": "^5.0.0-3"
+    "webpack-merge": "^5.10.0",
+    "webpack-parallel-uglify-plugin": "^2.0.0",
+    "webpackbar": "^6.0.1"
   },
   "dependencies": {
     "@ant-design/charts": "^1.0.11",
@@ -86,9 +84,9 @@
     "loadsh": "^0.0.4",
     "marked": "^1.2.6",
     "nprogress": "^0.2.0",
-    "react-hot-loader": "^4.13.0",
+    "react-hot-loader": "^4.13.1",
     "react-loadable": "^5.5.0",
-    "typescript": "^4.0.3",
+    "typescript": "^5.4.4",
     "url-loader": "^4.1.1"
   },
   "eslintConfig": {
@@ -112,5 +110,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }

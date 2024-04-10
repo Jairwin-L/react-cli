@@ -5,13 +5,13 @@ export const HostName = window.location.hostname;
 export const protocol = window.location.protocol;
 export const ORIGIN = window.location.origin;
 export const API_URL_MAP = {
-	"web.jairwin.cn": ApiUrl.MOCK,
+	"localhost": ApiUrl.MOCK,
 	"react-custom-cli": ApiUrl.MOCK,
 };
 
 for (let [key, value] of Object.entries(API_URL_MAP)) {
 	if (HostName.includes(key)) {
-		BASE_URL = `${value}/api/`;
+		BASE_URL = value;
 		break
 	}
 }

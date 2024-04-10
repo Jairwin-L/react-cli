@@ -13,7 +13,7 @@ export const arrayRandomColor = () => {
 
 export const titleMap = (URL: string) => {
 	const map: { [key: string]: string } = {
-		'web.jairwin.cn': `Local | `,
+		'localhost:8088': `Local | `,
 		'test.admin.jairwin.cn': `Test | `,
 		'admin.jairwin.cn': ``,
 	}

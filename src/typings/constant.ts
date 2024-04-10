@@ -1,5 +1,5 @@
 export enum ApiUrl {
-	MOCK = "https://anymock.alipay.com/direct-mock/http/122750320"
+	MOCK = "https://mock.apifox.com/m1/4020462-3657047-default"
 }
 
 export enum DateFormat {

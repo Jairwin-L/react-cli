@@ -7,21 +7,25 @@ const webpack = require('webpack');
 // html-webpack-plugin：https://www.webpackjs.com/plugins/html-webpack-plugin/
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // clean-webpack-plugin：https://github.com/johnagan/clean-webpack-plugin
-const {CleanWebpackPlugin} = require("clean-webpack-plugin");
+// TODO:
+// const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+// TODO:
+// const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 // html-webpack-externals-plugin：https://github.com/mmiller42/html-webpack-externals-plugin
 const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
 // webpackbar：https://github.com/nuxt-contrib/webpackbar（可以显示build进度，和dev环境一致的效果）
-const WebpackBar = require('webpackbar');
+// TODO:
+// const WebpackBar = require('webpackbar');
 // 提供离线体验
-const OfflinePlugin = require('offline-plugin');
+// const OfflinePlugin = require('offline-plugin');
 const WebpackHookPlugin = require('webpack-hook-plugin');
 const tsImportPluginFactory = require('ts-import-plugin');
 // 生成包含构建hash的json文件：SPA会定期把初始 hash 和远程的 hash 相比较，并在不匹配的时候重新加载。
 const BuildHashPlugin = require('build-hash-webpack-plugin');
 // 删除未使用的css和重复的css规则。它通过查看webpack输出目录中的所有静态资源来检测所有未使用的css规则。
-const CssCleanupPlugin = require('css-cleanup-webpack-plugin');
+// TODO:
+// const CssCleanupPlugin = require('css-cleanup-webpack-plugin');
 const path = require('path');
 const devMode = process.env.NODE_ENV === 'production';
 const resolvePath = dir => path.join(__dirname, '..', dir);
@@ -66,8 +70,10 @@ module.exports = {
 		publicPath: "/",
 		// path: resolvePath('dist'),
 		// 决定打包好的资源输出到 output.path 选项指定目录位置的文件名，如果只输出一个文件，可以把 filename 属性写成静态不变的名称。
-		filename: 'bundle.js',
-		chunkFilename: 'js/[name].[hash].js',
+		// filename: 'bundle.js',
+		filename: 'js/[name].js', // 使用入口点的名称作为文件名的一部分
+		// TODO:
+		// chunkFilename: 'js/[name].[hash].js',
 	},
 	/* 
 	外部扩展：https://webpack.docschina.org/configuration/externals/
@@ -86,20 +92,23 @@ module.exports = {
 			favicon: resolvePath('public/jairwin.ico')
 		}),
 		// 在打包之前，可以删除dist文件夹下的所有内容
-		new CleanWebpackPlugin(),
-		new ForkTsCheckerWebpackPlugin(),
-		new WebpackBar(),
+		// TODO:
+		// new CleanWebpackPlugin(),
+		// new ForkTsCheckerWebpackPlugin(),
+		// new WebpackBar(),
 		new MiniCssExtractPlugin(),
 		new HtmlWebpackExternalsPlugin({
 			externals,
 		}),
-		new OfflinePlugin(),
+		// TODO:
+		// new OfflinePlugin(),
 		new WebpackHookPlugin({
 			onBuildStart: ['echo "Webpack Start"'],
 			onBuildEnd: ['echo "Webpack End"']
 		}),
 		new BuildHashPlugin(),
-		new CssCleanupPlugin(),
+		// TODO:
+		// new CssCleanupPlugin(),
 	],
 	/* 
 	https://webpack.docschina.org/configuration/module/
