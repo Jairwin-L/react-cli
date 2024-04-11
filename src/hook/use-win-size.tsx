@@ -1,25 +1,25 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from 'react';
 
 interface Size {
-	width: number
-	height: number
+  width: number;
+  height: number;
 }
 
 // 自定义hook：useWinSize
 export default (): Size => {
-	const [size, setSize] = useState<Size>({
-		width: document.documentElement.clientWidth,
-		height: document.documentElement.clientHeight
-	})
-	const onResize = useCallback(() => {
-		setSize({
-			width: document.documentElement.clientWidth,
-			height: document.documentElement.clientHeight
-		})
-	}, [])
-	useEffect(() => {
-		window.addEventListener('resize', onResize)
-		return () => window.removeEventListener('resize', onResize)
-	}, [onResize])
-	return size
-}
+  const [size, setSize] = useState<Size>({
+    width: document.documentElement.clientWidth,
+    height: document.documentElement.clientHeight,
+  });
+  const onResize = useCallback(() => {
+    setSize({
+      width: document.documentElement.clientWidth,
+      height: document.documentElement.clientHeight,
+    });
+  }, []);
+  useEffect(() => {
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, [onResize]);
+  return size;
+};

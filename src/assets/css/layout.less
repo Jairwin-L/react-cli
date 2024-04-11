@@ -6,64 +6,65 @@
   }
 }
 .aside {
-	position: fixed;
-	left: 0;
-	height: 100vh;
-	overflow-y: auto;
-	.logo {
-		height: 80px;
-		border-radius: 50%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		img {
-			height: 100%;
-		}
-	}
+  position: fixed;
+  left: 0;
+  height: 100vh;
+  overflow-y: auto;
+  .logo {
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      height: 100%;
+    }
+  }
 }
 .header {
-	background: @white;
-	padding: 0 16px;
-	display: flex;
-	justify-content: space-between;
-	.left_container {
-		cursor: pointer;
-	}
-	.right_container {
-		display: flex;
-		align-items: center;
-		a {
-			color: #333;
-			margin-right: 16px;
-			&:last-child {
-				margin-right: 0;
-			}
-		}
-	}
+  background: @white;
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  .left_container {
+    cursor: pointer;
+  }
+  .right_container {
+    display: flex;
+    align-items: center;
+    a {
+      color: #333;
+      margin-right: 16px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
 }
 .base_container {
-	background: @white;
-	padding: 16px;
-	&:last-child {
-		margin-bottom: 0;
+  background: @white;
+  padding: 16px;
+  &:last-child {
+    margin-bottom: 0;
   }
   .cursor_pointer {
     cursor: pointer;
   }
-	.primary_btn {
-		color: @primary_btn;
-	}
-	.edit_btn {
-		color: @edit_btn;
-	}
-	.detail_btn {
-		color: detail_btn;
-	}
-	.delete_btn {
+  .primary_btn {
+    color: @primary_btn;
+  }
+  .edit_btn {
+    color: @edit_btn;
+  }
+  .detail_btn {
+    color: detail_btn;
+  }
+  .delete_btn {
     color: @delete_btn;
-	}
-	.pagination_container, .ant-pagination {
-		margin-top: 16px !important;
+  }
+  .pagination_container,
+  .ant-pagination {
+    margin-top: 16px !important;
   }
   .ant-tag {
     &:last-child {
@@ -77,14 +78,14 @@
   }
 }
 .table_container {
-	background: @white;
+  background: @white;
   padding: 16px;
 }
 .btn_container {
   margin-bottom: 16px;
 }
 .main {
-	margin-top: 16px;
+  margin-top: 16px;
 }
 .ant-upload-list {
   display: none;

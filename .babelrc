@@ -1,16 +1,20 @@
 {
   "presets": [
     [
-			"@babel/preset-env", {
-				"targets": {
-					"chrome": "67"
-				},
-				"useBuiltIns": "usage"
-			}
-		],
-    ["@babel/preset-react", {
-      "runtime": "automatic"
-    }]
+      "@babel/preset-env",
+      {
+        "targets": {
+          "chrome": "67"
+        },
+        "useBuiltIns": "usage"
+      }
+    ],
+    [
+      "@babel/preset-react",
+      {
+        "runtime": "automatic"
+      }
+    ]
   ],
   "plugins": [
     "@babel/transform-runtime",
@@ -22,7 +26,7 @@
     ],
     ["@babel/plugin-proposal-class-properties", { "loose": true }],
     // ["import", {"libraryName": "antd", "style": true}],
-    ["dynamic-import-webpack"],  // 异步代码(import)
+    ["dynamic-import-webpack"], // 异步代码(import)
     "react-hot-loader/babel"
   ]
 }

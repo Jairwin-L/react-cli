@@ -21,13 +21,12 @@
   overflow: hidden;
 }
 
-
 /* 绝对布局全覆盖常用于对话框的遮罩层
  * ${background} 背景色
  * ${z-index} 所在层级
  * ${opacity} 透明度 
  */
- .allCover(
+.allCover(
   $background: black,
   $z-index: 100,
   $opacity: 1
@@ -388,7 +387,7 @@ $directions: (left) (right) (top) (bottom)) {
     border-radius: 50%;
   }
 
-  input:checked+label:after {
+  input:checked + label:after {
     background-color: blue;
   }
 }
@@ -428,7 +427,7 @@ $directions: (left) (right) (top) (bottom)) {
     left: 15px;
   }
 
-  input:checked+label:after {
+  input:checked + label:after {
     background-color: darkkhaki;
   }
 }

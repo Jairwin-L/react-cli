@@ -1,7 +1,7 @@
 export interface ItemParam {
-	username: string
-	password: string
-	roleId?: string
+  username: string;
+  password: string;
+  roleId?: string;
 }
 
-export type UpdateParam = ItemParam
+export type UpdateParam = ItemParam;

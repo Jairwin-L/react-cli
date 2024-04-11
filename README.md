@@ -9,7 +9,7 @@ yarn add less-loader style-loader css-loader -D
 ## TODO
 
 - [ ] 完成 webpack 升级[进行中]
-- [ ] 增加代码规范检测
+- [ ] 增加代码规范检测[进行中]
 - [ ] 代码重构
 
 ## FAQ

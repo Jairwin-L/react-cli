@@ -1,4 +1,4 @@
-"use strict"
+'use strict';
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const baseConfig = require('./webpack.config.js');
@@ -13,7 +13,7 @@ module.exports = merge(baseConfig, {
     // open: true,
     compress: true,
     historyApiFallback: true,
-		// TODO:
+    // TODO:
     // hot: true,
     // inline: true,
     // 选项让你更精确地控制bundle信息该怎么显示
