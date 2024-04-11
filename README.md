@@ -8,8 +8,8 @@ yarn add less-loader style-loader css-loader -D
 
 ## TODO
 
-- [ ] 完成 webpack 升级[进行中]
-- [ ] 增加代码规范检测[进行中]
+- [x] 完成 webpack 升级
+- [x] 增加代码规范检测
 - [ ] 代码重构
 
 ## FAQ

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 interface Size {
   width: number;
@@ -6,7 +6,7 @@ interface Size {
 }
 
 // 自定义hook：useWinSize
-export default (): Size => {
+export default function useWinSize(): Size {
   const [size, setSize] = useState<Size>({
     width: document.documentElement.clientWidth,
     height: document.documentElement.clientHeight,
@@ -22,4 +22,4 @@ export default (): Size => {
     return () => window.removeEventListener('resize', onResize);
   }, [onResize]);
   return size;
-};
+}

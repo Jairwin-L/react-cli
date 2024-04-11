@@ -20,6 +20,7 @@
       "@/*": ["./src/*"]
     }
   },
+  "types": ["node"],
   "include": [
     "./src",
     "config/webpack.config.js",

@@ -1,15 +1,16 @@
-import React, { useState, useReducer, useEffect } from 'react';
-import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
-import { Layout, BackTop, message, Modal } from 'antd';
+import '@css/layout.less';
+import avatarPng from '@img/jairwin.png';
+import { BackTop, Modal, message } from 'antd';
+import clsx from 'clsx';
+import { useEffect, useReducer, useState } from 'react';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
+import Footer from '../components/footer';
+import Header from '../components/header';
+import routes from '../routes';
 import { MenuItem } from '../typings/menu';
 import { Routes } from '../typings/route';
-import routes from '../routes';
-import avatarPng from '@img/jairwin.png';
-import menuList from './menu';
-import '@css/layout.less';
-import Header from '../components/header';
 import Aside from './aside';
-import Footer from '../components/footer';
+import menuList from './menu';
 
 const token = sessionStorage.getItem('token');
 
@@ -22,7 +23,7 @@ const reducer = (state: { menuToggle: boolean }, action: { type: 'menuToggle' })
   }
 };
 
-export default (): JSX.Element => {
+export default function LayoutPage() {
   const history = useHistory();
   const [menu, setMenu] = useState<MenuItem[]>();
   const [loginFlag, setLoginFlag] = useState<boolean>(false);
@@ -47,21 +48,19 @@ export default (): JSX.Element => {
   return (
     <>
       <BackTop />
-      <Aside menuToggle={state.menuToggle} menu={menu} />
-      <Layout
-        style={{
-          marginLeft: state.menuToggle ? '80px' : '200px',
-          minHeight: '100vh',
-        }}
+      <div
+        className={clsx('layout-wrap', {
+          'layout-wrap-aside': state.menuToggle,
+        })}
       >
-        <Header
-          menuToggle={state.menuToggle}
-          onMenu={onMenu}
-          avatar={avatarPng}
-          loginOut={loginOut}
-          history={history}
-        />
+        <Aside menuToggle={state.menuToggle} menu={menu} />
         <div className="layout_container">
+          <Header
+            menuToggle={state.menuToggle}
+            onMenu={onMenu}
+            avatar={avatarPng}
+            loginOut={loginOut}
+          />
           <Switch>
             {routes.map((item: Routes) => {
               return (
@@ -75,9 +74,9 @@ export default (): JSX.Element => {
             })}
             <Redirect to="/auth/404" />
           </Switch>
+          <Footer />
         </div>
-        <Footer />
-      </Layout>
+      </div>
       <Modal
         title="提示"
         centered
@@ -91,4 +90,4 @@ export default (): JSX.Element => {
       </Modal>
     </>
   );
-};
+}
