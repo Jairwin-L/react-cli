@@ -1,4 +1,3 @@
-import 'animate.css';
 import { hot } from 'react-hot-loader';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import loadable from './utils/loadable';

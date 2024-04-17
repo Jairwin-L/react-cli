@@ -7,28 +7,24 @@ const webpack = require('webpack');
 // html-webpack-plugin：https://www.webpackjs.com/plugins/html-webpack-plugin/
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // clean-webpack-plugin：https://github.com/johnagan/clean-webpack-plugin
-// TODO:
-// const {CleanWebpackPlugin} = require("clean-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// TODO:
-// const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 // html-webpack-externals-plugin：https://github.com/mmiller42/html-webpack-externals-plugin
 const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
 // webpackbar：https://github.com/nuxt-contrib/webpackbar（可以显示build进度，和dev环境一致的效果）
-// TODO:
-// const WebpackBar = require('webpackbar');
+const WebpackBar = require('webpackbar');
 // 提供离线体验
 // const OfflinePlugin = require('offline-plugin');
 const WebpackHookPlugin = require('webpack-hook-plugin');
 const tsImportPluginFactory = require('ts-import-plugin');
 // 生成包含构建hash的json文件：SPA会定期把初始 hash 和远程的 hash 相比较，并在不匹配的时候重新加载。
 const BuildHashPlugin = require('build-hash-webpack-plugin');
-// 删除未使用的css和重复的css规则。它通过查看webpack输出目录中的所有静态资源来检测所有未使用的css规则。
-// TODO:
-// const CssCleanupPlugin = require('css-cleanup-webpack-plugin');
+
 const path = require('path');
 
-const devMode = process.env.NODE_ENV === 'production';
+const prodMode = process.env.NODE_ENV === 'production';
 const resolvePath = (dir) => path.join(__dirname, '..', dir);
 // https://cdn.baomitu.com
 const externals = [
@@ -59,42 +55,44 @@ module.exports = {
   entry: {
     app: ['react-hot-loader/patch', resolvePath('src/index.tsx')],
   },
-  // entry: ["react-hot-loader/patch", resolve('src/index.jsx')],
   /* 
 	https://webpack.docschina.org/concepts/#%E8%BE%93%E5%87%BAoutput
 	在哪里输出它所创建的 bundle，以及如何命名这些文件。主要输出文件的默认值是 ./dist/main.js，其他生成文件默认放置在 ./dist 文件夹中
 	*/
   output: {
+    path: path.resolve(process.cwd(), 'dist'),
     publicPath: '/',
     // path: resolvePath('dist'),
     // 决定打包好的资源输出到 output.path 选项指定目录位置的文件名，如果只输出一个文件，可以把 filename 属性写成静态不变的名称。
-    // filename: 'bundle.js',
-    filename: 'js/[name].js', // 使用入口点的名称作为文件名的一部分
-    // TODO:
-    // chunkFilename: 'js/[name].[hash].js',
+    filename: 'js/[name]-[chunkhash:6].js',
+    chunkFilename: 'js/[name]-[chunkhash:6].js',
   },
   /* 
 	外部扩展：https://webpack.docschina.org/configuration/externals/
 	可以不处理应用的某些依赖库，使用externals配置后，依旧可以在代码中通过CMD、AMD或者window/global全局的方式访问（此教程使用了静态资源托管库）
 	*/
   plugins: [
+    new MiniCssExtractPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      template: `public/index.html`,
+      template: 'public/index.html',
       minify: {
-        removeComments: devMode, // 移除HTML中的注释
-        collapseWhitespace: devMode, // 删除空白符与换行符
-        removeAttributeQuotes: devMode, // 删除双引号
-        minifyCSS: devMode, // 压缩内联css
+        removeComments: prodMode, // 移除HTML中的注释
+        collapseWhitespace: prodMode, // 删除空白符与换行符
+        removeAttributeQuotes: prodMode, // 删除双引号
+        minifyCSS: prodMode, // 压缩内联css
       },
       favicon: resolvePath('public/jairwin.ico'),
     }),
     // 在打包之前，可以删除dist文件夹下的所有内容
-    // TODO:
-    // new CleanWebpackPlugin(),
-    // new ForkTsCheckerWebpackPlugin(),
-    // new WebpackBar(),
-    new MiniCssExtractPlugin(),
+    new CleanWebpackPlugin(),
+    new ForkTsCheckerWebpackPlugin({
+      typescript: {
+        memoryLimit: 4096,
+        configFile: './tsconfig.json',
+      },
+    }),
+    new WebpackBar(),
     new HtmlWebpackExternalsPlugin({
       externals,
     }),
@@ -105,8 +103,10 @@ module.exports = {
       onBuildEnd: ['echo "Webpack End"'],
     }),
     new BuildHashPlugin(),
-    // TODO:
-    // new CssCleanupPlugin(),
+    new webpack.IgnorePlugin({
+      resourceRegExp: /^\.\/locale$/,
+      contextRegExp: /dayjs/,
+    }),
   ],
   /* 
 	https://webpack.docschina.org/configuration/module/
@@ -163,7 +163,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.css$/,
+        test: /\.(c|sa|sc)ss$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -175,7 +175,13 @@ module.exports = {
             },
           },
           'css-loader',
+          'less-loader',
         ],
+      },
+      {
+        test: /\.(c|sa|sc)ss$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
+        exclude: /node_modules/,
       },
       {
         test: /\.(less)$/,
@@ -249,29 +255,34 @@ module.exports = {
     },
   },
   optimization: {
+    minimize: true,
+    minimizer: [new CssMinimizerPlugin()],
     splitChunks: {
-      // 启动代码分割,不写有默认配置项
-      chunks: 'all', // 参数all/initial/async，只对所有/同步/异步进行代码分割
-      // minSize: 30000, //大于30kb才会对代码分割
-      // maxSize: 0,
-      // minChunks: 1,//打包生成的文件，当一个模块至少用多少次时才会进行代码分割
-      // maxAsyncRequests: 5,//同时加载的模块数最多是5个
-      // maxInitialRequests: 3,//入口文件最多3个模块会做代码分割，否则不会
-      // automaticNameDelimiter: '~',//文件自动生成的连接符
-      // name: true,
-      // cacheGroups: {//对同步代码走缓存组
-      //   vendors: {
-      //     test: /[\\/]node_modules[\\/]/,
-      //     priority: -10,//谁优先级大就把打包后的文件放到哪个组
-      //     filename: 'vendors.js'
-      //   },
-      //   default: {
-      //     minChunks: 2,
-      //     priority: -20,
-      //     reuseExistingChunk: true,//模块已经被打包过了，就不用再打包了，复用之前的就可以
-      //     filename: 'common.js' //打包之后的文件名
-      //   }
-      // }
+      chunks: 'async',
+      minSize: 20000,
+      minRemainingSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
+      enforceSizeThreshold: 50000,
+      cacheGroups: {
+        defaultVendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          reuseExistingChunk: true,
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+        styles: {
+          name: 'styles',
+          test: /\.(c|sa|sc)ss$/,
+          chunks: 'all',
+          enforce: true,
+        },
+      },
     },
   },
 };

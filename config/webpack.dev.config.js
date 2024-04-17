@@ -10,11 +10,16 @@ module.exports = merge(baseConfig, {
   // 配置服务端目录和端口
   devServer: {
     port: 8088,
-    // open: true,
     compress: true,
     historyApiFallback: true,
+    allowedHosts: ['localhost:8087'],
+    client: {
+      overlay: true,
+      logging: 'info',
+      progress: true,
+      reconnect: true,
+    },
     // TODO:
-    // hot: true,
     // inline: true,
     // 选项让你更精确地控制bundle信息该怎么显示
     // stats: {
