@@ -1,5 +1,5 @@
 export enum ApiUrl {
-  MOCK = 'https://mock.apifox.com/m1/4020462-3657047-default',
+  MOCK = 'https://apifoxmock.com/m1/4020462-3657047-default',
 }
 
 export enum DateFormat {
