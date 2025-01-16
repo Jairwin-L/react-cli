@@ -1,7 +1,6 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Layout } from 'antd';
 import { Store } from 'antd/lib/form/interface';
-import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Footer from '@/components/footer';
 import { HostName } from '../api/config';

@@ -1,6 +1,5 @@
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
-import { useEffect } from 'react';
 import Loadable from 'react-loadable';
 
 const useLoadingComponent = () => {

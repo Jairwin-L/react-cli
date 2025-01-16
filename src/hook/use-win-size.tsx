@@ -1,5 +1,3 @@
-import { useCallback, useEffect, useState } from 'react';
-
 interface Size {
   width: number;
   height: number;

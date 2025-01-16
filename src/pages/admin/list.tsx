@@ -1,5 +1,4 @@
 import { ColumnsType } from 'antd/es/table';
-import { useEffect, useState } from 'react';
 import { Item, ListData } from '../../api/response/user';
 import AddBtn from '../../components/add-btn';
 import Breadcrumb from '../../components/breadcrumb';

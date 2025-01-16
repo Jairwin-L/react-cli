@@ -106,6 +106,13 @@ module.exports = {
       resourceRegExp: /^\.\/locale$/,
       contextRegExp: /dayjs/,
     }),
+    require('unplugin-auto-import/webpack').default({
+      imports: ['react', 'react-router'],
+      dts: true, // 生成 TypeScript 声明
+      eslintrc: {
+        enabled: true, // <-- this
+      },
+    }),
   ],
   /* 
 	https://webpack.docschina.org/configuration/module/

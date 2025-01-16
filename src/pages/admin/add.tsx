@@ -1,5 +1,4 @@
 import { Button, Form, Input, Space } from 'antd';
-import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Breadcrumb from '../../components/breadcrumb';
 

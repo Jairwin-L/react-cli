@@ -27,6 +27,7 @@
     "config/webpack.dev.config.js",
     "config/webpack.prod.config.js",
     "postcss.config.js",
-    ".eslintrc.js"
+    ".eslintrc.js",
+    "./auto-imports.d.ts"
   ]
 }

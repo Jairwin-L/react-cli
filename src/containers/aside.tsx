@@ -1,4 +1,3 @@
-import React from 'react';
 import { Layout, Avatar } from 'antd';
 import CustomMenu from '../components/menu';
 import { MenuItem } from '../typings/menu';

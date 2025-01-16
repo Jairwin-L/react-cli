@@ -1,5 +1,4 @@
 import { Menu } from 'antd';
-import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Icon from '../components/icon';
 import { MenuItem } from '../typings/menu';

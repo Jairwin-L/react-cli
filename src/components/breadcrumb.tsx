@@ -1,4 +1,3 @@
-import React from 'react';
 import { Breadcrumb } from 'antd';
 import { Link } from 'react-router-dom';
 
@@ -37,4 +36,4 @@ function shouldRender(nextProps: Props, prevProps: Props) {
   return false;
 }
 
-export default React.memo(CustomBreadcrumb, shouldRender);
+export default memo(CustomBreadcrumb, shouldRender);

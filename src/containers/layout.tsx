@@ -1,6 +1,5 @@
 import { BackTop, Modal, message } from 'antd';
 import clsx from 'clsx';
-import { useEffect, useReducer, useState } from 'react';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import avatarPng from '../assets/img/jairwin.png';
 import Footer from '../components/footer';

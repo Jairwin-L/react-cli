@@ -1,9 +1,5 @@
 module.exports = {
   plugins: ['import'],
-  // parserOptions: {
-  //   sourceType: module,
-  //   ecmaVersion: 6,
-  // },
   rules: {
     'prefer-arrow-callback': [0, { allowNamedFunctions: 0 }],
     'react/display-name': 0,
