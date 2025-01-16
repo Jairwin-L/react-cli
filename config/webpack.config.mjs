@@ -97,7 +97,7 @@ const baseConfig = {
         removeAttributeQuotes: prodMode, // 删除双引号
         minifyCSS: prodMode, // 压缩内联css
       },
-      favicon: resolvePath('public/jairwin.ico'),
+      favicon: resolvePath('public/icon/favicon.ico'),
     }),
     // 在打包之前，可以删除dist文件夹下的所有内容
     new CleanWebpackPlugin(),
