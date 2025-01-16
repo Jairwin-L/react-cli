@@ -13,9 +13,10 @@
   "funding": "https://github.com/sponsors/Jairwin-L",
   "license": "MIT",
   "author": "Jairwin",
+  "type": "module",
   "scripts": {
-    "dev": "webpack-dev-server --config ./config/webpack.dev.config.js",
-    "build": "webpack --config ./config/webpack.prod.config.js",
+    "dev": "webpack-dev-server --config ./config/webpack.dev.config.mjs",
+    "build": "webpack --config ./config/webpack.prod.config.mjs",
     "ci:eslint": "eslint -f json src -o ./.ci/eslint.json",
     "lint": "eslint . && stylelint \"**/*.{css,less,scss}\"",
     "lint:fix": "prettier --write . && eslint --fix . && stylelint --fix \"**/*.{css,less,scss}\"",

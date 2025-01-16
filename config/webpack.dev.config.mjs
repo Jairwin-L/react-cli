@@ -1,9 +1,8 @@
-'use strict';
-const webpack = require('webpack');
-const { merge } = require('webpack-merge');
-const baseConfig = require('./webpack.config.js');
+import webpack from 'webpack';
+import { merge } from 'webpack-merge';
+import baseConfig from './webpack.config.mjs';
 
-module.exports = merge(baseConfig, {
+const devConfig = merge(baseConfig, {
   // 设置为开发模式
   mode: 'development',
   devtool: 'inline-source-map',
@@ -12,7 +11,7 @@ module.exports = merge(baseConfig, {
     port: 8088,
     compress: true,
     historyApiFallback: true,
-    allowedHosts: ['localhost:8087'],
+    allowedHosts: ['localhost'],
     client: {
       overlay: true,
       logging: 'info',
@@ -34,3 +33,5 @@ module.exports = merge(baseConfig, {
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
 });
+
+export default devConfig;

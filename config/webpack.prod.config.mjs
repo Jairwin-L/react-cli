@@ -1,7 +1,6 @@
-'use strict';
-const { merge } = require('webpack-merge');
-const TerserPlugin = require('terser-webpack-plugin');
-const baseConfig = require('./webpack.config.js');
+import { merge } from 'webpack-merge';
+import TerserPlugin from 'terser-webpack-plugin';
+import baseConfig from './webpack.config.mjs';
 // const PurgecssPlugin = require('purgecss-webpack-plugin');
 // const glob = require('glob');
 // const path = require('path');
@@ -10,7 +9,7 @@ const baseConfig = require('./webpack.config.js');
 //   src: path.join(__dirname, '../src'),
 // };
 
-module.exports = merge(baseConfig, {
+const prodConfig = merge(baseConfig, {
   mode: 'production',
   optimization: {
     concatenateModules: true,
@@ -39,3 +38,5 @@ module.exports = merge(baseConfig, {
     // }),
   ],
 });
+
+export default prodConfig;

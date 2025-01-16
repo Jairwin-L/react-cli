@@ -1,24 +1,10 @@
-import { ApiUrl } from '../typings/constant';
-
-export let BASE_URL = '';
+export const BASE_URL = 'https://apifoxmock.com/m1/4020462-3657047-default';
 export const HostName = window.location.hostname;
 export const { protocol } = window.location;
 export const ORIGIN = window.location.origin;
-export const API_URL_MAP = {
-  localhost: ApiUrl.MOCK,
-  'react-custom-cli': ApiUrl.MOCK,
-};
-
-for (const [key, value] of Object.entries(API_URL_MAP)) {
-  if (HostName.includes(key)) {
-    BASE_URL = value;
-    break;
-  }
-}
 
 export default {
   BASE_URL,
-  API_URL_MAP,
   HostName,
   protocol,
   ORIGIN,

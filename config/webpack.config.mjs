@@ -1,30 +1,46 @@
-'use strict';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import webpack from 'webpack';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+import HtmlWebpackExternalsPlugin from 'html-webpack-externals-plugin';
+import WebpackBar from 'webpackbar';
+import WebpackHookPlugin from 'webpack-hook-plugin';
+import tsImportPluginFactory from 'ts-import-plugin';
+import BuildHashPlugin from 'build-hash-webpack-plugin';
+import AutoImport from 'unplugin-auto-import/webpack';
 /* 
 	英文官网：https://webpack.js.org/
 	其他中文网：https://webpack.docschina.org/
 */
-const path = require('path');
-const webpack = require('webpack');
+// const path = require('path');
+// const webpack = require('webpack');
 // html-webpack-plugin：https://www.webpackjs.com/plugins/html-webpack-plugin/
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 // clean-webpack-plugin：https://github.com/johnagan/clean-webpack-plugin
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+// const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+// const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 // html-webpack-externals-plugin：https://github.com/mmiller42/html-webpack-externals-plugin
-const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
+// const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
 // webpackbar：https://github.com/nuxt-contrib/webpackbar（可以显示build进度，和dev环境一致的效果）
-const WebpackBar = require('webpackbar');
+// const WebpackBar = require('webpackbar');
 // 提供离线体验
 // const OfflinePlugin = require('offline-plugin');
-const WebpackHookPlugin = require('webpack-hook-plugin');
-const tsImportPluginFactory = require('ts-import-plugin');
+// const WebpackHookPlugin = require('webpack-hook-plugin');
+// const tsImportPluginFactory = require('ts-import-plugin');
 // 生成包含构建hash的json文件：SPA会定期把初始 hash 和远程的 hash 相比较，并在不匹配的时候重新加载。
-const BuildHashPlugin = require('build-hash-webpack-plugin');
+// const BuildHashPlugin = require('build-hash-webpack-plugin');
 
 const prodMode = process.env.NODE_ENV === 'production';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const resolvePath = (dir) => path.join(__dirname, '..', dir);
+
 // https://cdn.baomitu.com
 const externals = [
   {
@@ -44,7 +60,7 @@ const externals = [
   },
 ];
 
-module.exports = {
+const baseConfig = {
   /* 
 	第一项：
 	react-hot-loader：https://github.com/gaearon/react-hot-loader
@@ -106,7 +122,7 @@ module.exports = {
       resourceRegExp: /^\.\/locale$/,
       contextRegExp: /dayjs/,
     }),
-    require('unplugin-auto-import/webpack').default({
+    AutoImport({
       imports: ['react', 'react-router'],
       dts: true, // 生成 TypeScript 声明
       eslintrc: {
@@ -292,3 +308,5 @@ module.exports = {
     },
   },
 };
+
+export default baseConfig;
