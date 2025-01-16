@@ -26,6 +26,7 @@
     "config/webpack.config.js",
     "config/webpack.dev.config.js",
     "config/webpack.prod.config.js",
-    "postcss.config.js"
+    "postcss.config.js",
+    ".eslintrc.js"
   ]
 }

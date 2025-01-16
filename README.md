@@ -4,7 +4,7 @@
 
 ## less 配置
 
-yarn add less-loader style-loader css-loader -D
+pnpm add less-loader style-loader css-loader -D
 
 ## TODO
 

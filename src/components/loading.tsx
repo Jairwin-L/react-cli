@@ -1,5 +1,5 @@
-import '@css/components/loading.less';
 import { Spin } from 'antd';
+import '../assets/css/components/loading.less';
 
 export default function Loading() {
   return (

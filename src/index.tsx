@@ -1,10 +1,10 @@
-import '@css/app';
 import { ConfigProvider } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';
 import 'dayjs/locale/zh-cn';
 import ReactDOM from 'react-dom';
 import App from './app';
 import { titleMap } from './utils';
+import './assets/css/app.less';
 // import * as OfflinePluginRuntime from "offline-plugin/runtime";
 
 const hostName = window.location.hostname;

@@ -1,9 +1,8 @@
-import '@css/layout.less';
-import avatarPng from '@img/jairwin.png';
 import { BackTop, Modal, message } from 'antd';
 import clsx from 'clsx';
 import { useEffect, useReducer, useState } from 'react';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
+import avatarPng from '../assets/img/jairwin.png';
 import Footer from '../components/footer';
 import Header from '../components/header';
 import routes from '../routes';
@@ -11,6 +10,7 @@ import { MenuItem } from '../typings/menu';
 import { Routes } from '../typings/route';
 import Aside from './aside';
 import menuList from './menu';
+import '../assets/css/layout.less';
 
 const token = sessionStorage.getItem('token');
 

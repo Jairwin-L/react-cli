@@ -3,6 +3,7 @@
 	英文官网：https://webpack.js.org/
 	其他中文网：https://webpack.docschina.org/
 */
+const path = require('path');
 const webpack = require('webpack');
 // html-webpack-plugin：https://www.webpackjs.com/plugins/html-webpack-plugin/
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -21,8 +22,6 @@ const WebpackHookPlugin = require('webpack-hook-plugin');
 const tsImportPluginFactory = require('ts-import-plugin');
 // 生成包含构建hash的json文件：SPA会定期把初始 hash 和远程的 hash 相比较，并在不匹配的时候重新加载。
 const BuildHashPlugin = require('build-hash-webpack-plugin');
-
-const path = require('path');
 
 const prodMode = process.env.NODE_ENV === 'production';
 const resolvePath = (dir) => path.join(__dirname, '..', dir);
@@ -246,12 +245,12 @@ module.exports = {
     // 路径别名
     alias: {
       '@': resolvePath('src'),
-      '@constant': resolvePath('src/constant'),
-      '@components': resolvePath('src/components'),
-      '@api': resolvePath('src/api'),
-      '@utils': resolvePath('src/utils'),
-      '@css': resolvePath('src/assets/css'),
-      '@img': resolvePath('src/assets/img'),
+      '@/constant': resolvePath('src/constant'),
+      '@/components': resolvePath('src/components'),
+      '@/api': resolvePath('src/api'),
+      '@/utils': resolvePath('src/utils'),
+      '@/css': resolvePath('src/assets/css'),
+      '@/img': resolvePath('src/assets/img'),
     },
   },
   optimization: {

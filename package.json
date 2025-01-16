@@ -72,6 +72,8 @@
     "eslint": "^8.57.1",
     "eslint-config-ali": "^15.1.0",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-import-resolver-typescript": "^3.7.0",
+    "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.2.1",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^6.2.0",
@@ -108,6 +110,18 @@
     "webpack-parallel-uglify-plugin": "^2.0.0",
     "webpackbar": "^6.0.1"
   },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "cnpm": {
+    "mode": "pnpm"
+  },
+  "npm": {
+    "mode": "pnpm"
+  },
+  "yarn": {
+    "mode": "pnpm"
+  },
   "commitlint": {
     "extends": [
       "ali"
@@ -142,8 +156,5 @@
       "stylelint-config-ali",
       "stylelint-prettier/recommended"
     ]
-  },
-  "engines": {
-    "node": ">=16.0.0"
   }
 }

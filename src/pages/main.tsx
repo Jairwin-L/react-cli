@@ -1,11 +1,10 @@
-import '@css/main.less';
-import { DatePicker } from 'antd';
 import { useState } from 'react';
+import { DatePicker } from 'antd';
 import { DateFormat } from '../typings/constant';
 import { dateFormatYMD } from '../utils';
+import '../assets/css/main.less';
 
 const { RangePicker } = DatePicker;
-
 export default function Main() {
   const [rangeTime, setRangeTime] = useState<string[]>([]);
   const [dates, setDates] = useState<string[]>([]);

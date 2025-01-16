@@ -1,5 +1,4 @@
-import React from 'react';
-import '@css/components/href.less';
+import '../assets/css/components/href.less';
 
 interface HrefProps {
   hrefLink: string;
