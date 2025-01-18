@@ -9,7 +9,7 @@ import { MenuItem } from '../typings/menu';
 import { Routes } from '../typings/route';
 import Aside from './aside';
 import menuList from './menu';
-import '../assets/css/layout.less';
+import '../styles/layout.less';
 
 const token = sessionStorage.getItem('token');
 

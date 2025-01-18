@@ -3,11 +3,11 @@ import { Button, Form, Input, Layout } from 'antd';
 import { Store } from 'antd/lib/form/interface';
 import { useHistory } from 'react-router-dom';
 import Footer from '@/components/footer';
-import { HostName } from '../api/config';
-import * as AuthAction from '../api/request/auth';
-import { LoginResponse } from '../api/response/auth';
-import { titleMap } from '../utils';
-import '../assets/css/pages/login.less';
+import { HostName } from '../../api/config';
+import * as AuthAction from '../../api/request/auth';
+import { LoginResponse } from '../../api/response/auth';
+import { titleMap } from '../../utils';
+import './login.less';
 
 export default function Page() {
   const history = useHistory();

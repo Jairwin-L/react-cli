@@ -277,8 +277,8 @@ const baseConfig = {
       '@/components': resolvePath('src/components'),
       '@/api': resolvePath('src/api'),
       '@/utils': resolvePath('src/utils'),
-      '@/css': resolvePath('src/assets/css'),
-      '@/img': resolvePath('src/assets/img'),
+      '@/css': resolvePath('src/styles/css'),
+      '@/img': resolvePath('src/styles/img'),
     },
   },
   optimization: {
