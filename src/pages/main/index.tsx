@@ -1,7 +1,7 @@
 import { DatePicker } from 'antd';
-import { DateFormat } from '../typings/constant';
-import { dateFormatYMD } from '../utils';
-import '../styles/main.less';
+import { DateFormat } from '../../typings/constant';
+import { dateFormatYMD } from '../../utils';
+import './main.less';
 
 const { RangePicker } = DatePicker;
 export default function Main() {

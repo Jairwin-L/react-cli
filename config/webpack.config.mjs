@@ -68,7 +68,7 @@ const baseConfig = {
 	*/
   // 第二项（入口文件）：https://webpack.docschina.org/concepts/#%E5%85%A5%E5%8F%A3entry
   entry: {
-    app: ['react-hot-loader/patch', resolvePath('src/index.tsx')],
+    app: ['react-hot-loader/patch', resolvePath('src/main.tsx')],
   },
   /* 
 	https://webpack.docschina.org/concepts/#%E8%BE%93%E5%87%BAoutput

@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom';
 import Footer from '@/components/footer';
 import { HostName } from '../../api/config';
 import * as AuthAction from '../../api/request/auth';
-import { LoginResponse } from '../../api/response/auth';
 import { titleMap } from '../../utils';
 import './login.less';
 
@@ -16,14 +15,15 @@ export default function Page() {
     setLoginFlag(true);
     const { username = 'admin', password = '123456' } = values;
     try {
-      const data: LoginResponse = await AuthAction.login({
+      const resp: any = await AuthAction.login({
         username,
         password,
       });
-      console.log('data=======：', data);
+      const { success, data } = resp;
+      if (!success) return;
       sessionStorage.setItem('token', data?.token);
       setLoginFlag(false);
-      history.push('/main');
+      history.push('/main', { replace: true });
     } catch (error) {
       setLoginFlag(false);
       console.log(error);
