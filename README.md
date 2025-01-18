@@ -2,15 +2,15 @@
 
 ## 运行项目
 
+```
+pnpm install
+pnpm dev
+pnpm build
+```
+
 ## less 配置
 
 pnpm add less-loader style-loader css-loader -D
-
-## TODO
-
-- [x] 完成 webpack 升级
-- [x] 增加代码规范检测
-- [ ] 代码重构
 
 ## FAQ
 

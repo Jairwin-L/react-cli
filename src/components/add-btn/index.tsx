@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import { useHistory } from 'react-router-dom';
 
-export default () => {
+export default function AddBtn() {
   const history = useHistory();
   return (
     <Button
@@ -14,4 +14,4 @@ export default () => {
       添加
     </Button>
   );
-};
+}

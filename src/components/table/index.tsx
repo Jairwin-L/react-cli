@@ -1,12 +1,12 @@
 import { Table } from 'antd';
-import Loading from '../components/loading';
-import CreateContext from '../hook/create-context';
+import CreateContext from '../../hook/create-context';
+import Loading from '../loading';
 
 export interface Props {
   onPage: (param: number) => void;
 }
 
-export default (props: Props) => {
+export default function TableList(props: Props) {
   const data = useContext(CreateContext);
   const { total, pageIndex, pageSize, columns, list, loading } = data;
   const onPage = (page: number) => props.onPage(page);
@@ -34,4 +34,4 @@ export default (props: Props) => {
       )}
     </>
   );
-};
+}

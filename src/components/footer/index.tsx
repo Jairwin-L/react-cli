@@ -1,5 +1,5 @@
-import Href from '../components/href';
-import '../assets/css/components/footer.less';
+import Href from '../href';
+import './footer.less';
 
 export default function Footer() {
   return (

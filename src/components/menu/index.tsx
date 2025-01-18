@@ -1,7 +1,7 @@
 import { Menu } from 'antd';
 import { Link, useLocation } from 'react-router-dom';
-import Icon from '../components/icon';
-import { MenuItem } from '../typings/menu';
+import { MenuItem } from '../../typings/menu';
+import Icon from '../icon';
 
 interface Keys {
   openKeys: string[];
@@ -21,7 +21,7 @@ const getOpenKeys = (string: string) => {
   return newArr;
 };
 
-export default (props: any): JSX.Element => {
+export default function SideMenu(props: { menu: MenuItem[] }) {
   const { menu } = props;
   const { pathname } = useLocation();
   const [state, setState] = useState<Keys>({
@@ -105,4 +105,4 @@ export default (props: any): JSX.Element => {
       )}
     </Menu>
   );
-};
+}

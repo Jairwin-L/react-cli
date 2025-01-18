@@ -9,9 +9,14 @@ interface Props {
   className?: string;
 }
 
-export default (props: Props) =>
-  props.className ? (
-    <IconFont type={props.type} className={props.className} />
-  ) : (
-    <IconFont type={props.type} />
+export default function Icon(props: Props) {
+  return (
+    <>
+      {props.className ? (
+        <IconFont type={props.type} className={props.className} />
+      ) : (
+        <IconFont type={props.type} />
+      )}
+    </>
   );
+}

@@ -9,7 +9,7 @@ import { LoginResponse } from '../api/response/auth';
 import { titleMap } from '../utils';
 import '../assets/css/pages/login.less';
 
-export default function Login() {
+export default function Page() {
   const history = useHistory();
   const [loginFlag, setLoginFlag] = useState<boolean>(false);
   const onFinish = async (values: Store) => {

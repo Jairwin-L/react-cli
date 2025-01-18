@@ -2,8 +2,8 @@ import { ColumnsType } from 'antd/es/table';
 import { Item, ListData } from '../../api/response/user';
 import AddBtn from '../../components/add-btn';
 import Breadcrumb from '../../components/breadcrumb';
-import Table from '../../components/table';
 import CreateContext from '../../hook/create-context';
+import TableList from '@/components/table';
 
 export default function List() {
   const [list, setList] = useState<ListData[]>([]);
@@ -40,7 +40,7 @@ export default function List() {
         value={{ text: '添加用户', totalCount, pageIndex, pageSize, columns, list }}
       >
         <AddBtn />
-        <Table onPage={onPage} />
+        <TableList onPage={onPage} />
       </CreateContext.Provider>
     </>
   );
